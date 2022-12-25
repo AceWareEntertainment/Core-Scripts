@@ -1,13 +1,3 @@
-------------------------------------------------
---
--- Freecam.lua
--- Written by: Fractality
--- Edited by: TheGamer101, to make it work without the screen gui, remove the Class library
--- and add alternative key bindings.
-------------------------------------------------
-
--- To exit and enter free camera, use key shortcut Left Shift + P
-
 local player = game:GetService("Players")
 while not player.LocalPlayer do player.Changed:wait() end
 player = player.LocalPlayer
@@ -49,8 +39,6 @@ function ToggleGui(on)
 	StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, GuiOn("PlayerList"))
 	StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat, GuiOn("Chat"))
 end
-
-------------------------------------------------
 
 local DEF_FOV = 70
 local NM_ZOOM = math.tan(DEF_FOV * math.pi/360)
@@ -94,8 +82,6 @@ function CreateLetterBox()
 	return script.Parent
 end
 
-------------------------------------------------
-
 local screenGuis = {}
 local freeCamEnabled = false
 local letterBoxEnabled = true
@@ -118,8 +104,6 @@ local rate_fov = 0
 
 local SpeedModifier = 1
 
-------------------------------------------------
-
 local function Clamp(x, min, max)
 	return x < min and min or x > max and max or x
 end
@@ -139,8 +123,6 @@ local function InputCurve(x)
 	end
 	return 0
 end
-
-------------------------------------------------
 
 local function ProcessInput(input, processed)
 	local userInputType = input.UserInputType
@@ -224,16 +206,12 @@ local UpdateFreecam do
 	end
 end
 
-------------------------------------------------
-
 local function Panned(input, processed)
 	if not processed and input.UserInputType == Enum.UserInputType.MouseMovement then
 		local delta = input.Delta
 		panDeltaMouse = Vector2.new(-delta.y, -delta.x)
 	end
 end
-
-------------------------------------------------
 
 local function EnterFreecam()
 	ToggleGui(false)
@@ -329,7 +307,6 @@ local function ExitFreecam()
 	ToggleGui(true)
 end
 
-------------------------------------------------
 
 UIS.InputBegan:Connect(function(input, processed)
 	if not processed then
